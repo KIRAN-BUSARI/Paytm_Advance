@@ -19,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <AppbarClient />
-        <body className='dark:bg-black bg-white'>{children}</body>
+        <body className='dark:bg-black bg-white'>
+          <AppbarClient />
+          {children}
+        </body>
       </Providers>
     </html>
   );
