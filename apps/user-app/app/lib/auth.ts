@@ -11,8 +11,14 @@ export const authOptions = {
           label: "Phone number",
           type: "text",
           placeholder: "1231231231",
+          required: true,
         },
-        password: { label: "Password", type: "password" },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "...........",
+          required: true,
+        },
       },
       // TODO: User credentials type from next-aut
       async authorize(credentials: any) {
