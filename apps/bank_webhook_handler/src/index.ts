@@ -23,7 +23,7 @@ app.post("/hdfcWebhook", async (req, res) => {
         where: {
           userId: paymentInformation.userId,
         },
-        data: { 
+        data: {
           amount: {
             // You can also get this from your DB
             increment: Number(paymentInformation.amount),
