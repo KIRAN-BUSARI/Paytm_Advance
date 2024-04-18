@@ -6,15 +6,27 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
 
 async function getBalance() {
-    const session = await getServerSession(authOptions);
-    const balance = await prisma.balance.findFirst({
-        where: {
-            userId: session?.user?.id
+    try {
+        const session = await getServerSession(authOptions);
+        const userId = session?.user?.id;
+
+        console.log(userId);
+
+        if (!userId) {
+            throw new Error("User ID not found in session.");
         }
-    });
-    return {
-        amount: balance?.amount || 0,
-        locked: balance?.locked || 0
+        const balance = await prisma.balance.findFirst({
+            where: {
+                userId: userId
+            }
+        });
+        return {
+            amount: balance?.amount || 0,
+            locked: balance?.locked || 0
+        };
+    } catch (error) {
+        console.error("Error fetching balance:", error);
+        throw error; // Re-throw the error to propagate it
     }
 }
 
